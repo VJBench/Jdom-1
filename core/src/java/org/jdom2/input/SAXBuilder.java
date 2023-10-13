@@ -971,6 +971,11 @@ public class SAXBuilder implements SAXEngine {
 			}
 		}
 
+		// Set any user-specified features on the parser.
+		for (final Map.Entry<String, Boolean> me : features.entrySet()) {
+			internalSetFeature(parser, me.getKey(), me.getValue().booleanValue(), me.getKey());
+		}
+
 		// Set any user-specified properties on the parser.
 		for (final Map.Entry<String, Object> me : properties.entrySet()) {
 			internalSetProperty(parser, me.getKey(), me.getValue(), me.getKey());
@@ -1002,10 +1007,7 @@ public class SAXBuilder implements SAXEngine {
 				// No lexical reporting available
 			}
 		}
-		// Set any user-specified features on the parser.
-		for (final Map.Entry<String, Boolean> me : features.entrySet()) {
-			internalSetFeature(parser, me.getKey(), me.getValue().booleanValue(), me.getKey());
-		}
+
 	}
 
 	/**
